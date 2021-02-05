@@ -1,0 +1,93 @@
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+h1 {
+    padding: 0;
+    margin: 0;
+}
+h2 {
+    padding: 0;
+    margin: 0;
+}
+h3 {
+    padding: 0;
+    margin: 0;
+}
+h4 {
+    padding: 0;
+    margin: 0;
+}
+#leftMenu{
+    background:rgb(227, 219, 255);
+    position: fixed;
+    padding: 10px;
+    height: 100%;
+    width: 240px;
+    left: 0;
+    top: 0;
+
+}
+
+#content{
+    position: relative;
+    padding-left: 40px;
+    left: 240px;
+    right: 80px;
+    position: absolute;
+
+}
+#categoryHead{
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 20px;
+    padding-top: 20px;
+}
+#categoryTitle{
+    float: left;
+}
+#categoryFunctions{
+    float:inline-end;
+    text-align: right;
+    padding-right: 20px;
+}
+
+.taskContainer{
+    background:rgb(219, 229, 255);
+    border: 1px solid lightblue;
+    border-radius: 8px;
+    margin: 4px;
+}
+
+.taskHead{
+    position: relative;
+    overflow: hidden;
+    padding: 0px;
+    
+}
+
+.taskTitle{
+    float: left;
+    padding: 0px;
+    padding-left: 20px;
+    margin: 0px;
+    bottom: 0;
+}
+.dueDate{
+    float: left;
+    position: absolute;
+    padding: 0px;
+    padding-left: 50%;
+    bottom: 0;
+}
+.taskFunctions{
+    float: inline-end;
+
+    padding: 0px;
+    padding-top: 8px;
+    padding-right: 30px;
+
+    bottom: 0;
+}
+.taskDescription{
+    padding-left: 45px;
+}
