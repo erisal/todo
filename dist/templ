@@ -1,0 +1,25 @@
+    <div id="content">
+        <div id="categoryHead">
+            <div id="categoryTitle"><h1>General</h1></div>
+            <div id="categoryFunctions"><h1>+</h1></div>
+        </div>
+
+        <div class="taskContainer">
+            <div class="taskHead">
+                <div class="taskTitle">
+                    <h2>Task Title</h2>
+                </div>
+                <div class="dueDate">
+                    <h4>5 days</h4>
+                </div>
+                <div class="taskFunctions">
+                    <a>✓ . </a><a>X</a>
+                </div>
+             </div>
+             <div class="taskBody">
+                <div class="taskDescription">
+                    <h4>Description of a task goes here</h4>
+                </div>
+             </div>
+        </div>
+    </div>

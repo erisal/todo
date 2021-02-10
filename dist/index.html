@@ -1,17 +1,23 @@
 <html>
 <head>
     <title>To Do</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+<link href="https://fonts.googleapis.com/css2?family=Quicksand&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="styles.css">
  </head>
 <body>
     <div id="leftMenu">
-        <h2>Today</h2>
-        <h2>This Week</h2>
-        <h2>Categories:</h2>
-        <h3>General</h3>
-        <h3>Deck</h3>
-        <h3>Kitchen</h3>
-        <h3>Learning</h3>
+        <div id="projectMenuHead">
+            <input type='button' value="+ add" id='addProjectButton' onclick='renderPage.toggleProjectForm()'>
+            <h2>Projects</h2>
+            
+
+
+        <div id="projectMenu">
+            
+
+            </div>
+        </div>
     </div>
 
     <div id="content">
@@ -26,7 +32,7 @@
                     <h2>Task Title</h2>
                 </div>
                 <div class="dueDate">
-                    <h3>5 days</h3>
+                    <h4>5 days</h4>
                 </div>
                 <div class="taskFunctions">
                     <a>✓ . </a><a>X</a>
@@ -40,7 +46,40 @@
         </div>
     </div>
 
+<div class="taskWhiteOut">
+    <div class="taskForm">
+        <form id="addTaskForm">
+            <label>Title</label><br>
+            <input type="text" value="" id="newTaskTitle" required><br>
+            <label>Description</label><br>
+            <textarea id="newTaskDescription" rows="2" cols="40"></textarea>><br>
+            <label>Due Date</label><br>
+            <input type="date" value="" id="newTaskDue"><br>
+            <label>Priority </label><select name="priority" id="newTaskPriority">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select><br>
+            <input type="submit" value="Add Task" onclick="renderPage.dispatchAddTask()"><input type="button" value="Cancel" onclick="renderPage.toggleTaskForm()">
+        </form>
+    </div>
+</div>
+w
+<div class="projectWhiteOut">
+    <div class="projectForm">
+        <form id="addProjectForm">
+            <label>Project Title</label><br>
+            <input type="text" value="" id="newProjectTitle" required><br>
+            <label>Description</label><br>
+            <textarea id="newProjectDescription" rows="2" cols="40"></textarea>><br>
+            <input type="submit" value="Add Project" onclick="renderPage.dispatchAddProject()"><input type="button" value="Cancel" onclick="renderPage.toggleProjectForm()">
+        </form>
+    </div>
+</div>
+
+
 
 </body>
-<script src="main.js"></script>
+<script src="../src/index.js"></script>
 </html>
