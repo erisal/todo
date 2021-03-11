@@ -8,7 +8,7 @@
 <body>
     <div id="leftMenu">
         <div id="projectMenuHead">
-            <input type='button' value="+ add" id='addProjectButton' onclick='renderPage.toggleProjectForm()'>
+            <input type='button' value="+ add" id='addProjectButton'>
             <h2>Projects</h2>
             
 
@@ -52,7 +52,7 @@
             <label>Title</label><br>
             <input type="text" value="" id="newTaskTitle" required><br>
             <label>Description</label><br>
-            <textarea id="newTaskDescription" rows="2" cols="40"></textarea>><br>
+            <textarea id="newTaskDescription" rows="2" cols="40"></textarea><br>
             <label>Due Date</label><br>
             <input type="date" value="" id="newTaskDue"><br>
             <label>Priority </label><select name="priority" id="newTaskPriority">
@@ -61,7 +61,7 @@
                 <option value="3">3</option>
                 <option value="4">4</option>
             </select><br>
-            <input type="submit" value="Add Task" onclick="renderPage.dispatchAddTask()"><input type="button" value="Cancel" onclick="renderPage.toggleTaskForm()">
+            <input type="submit" id="submitTask" value="Add Task"><input type="button" id="cancelTaskForm" value="Cancel">
         </form>
     </div>
 </div>
@@ -73,7 +73,7 @@ w
             <input type="text" value="" id="newProjectTitle" required><br>
             <label>Description</label><br>
             <textarea id="newProjectDescription" rows="2" cols="40"></textarea>><br>
-            <input type="submit" value="Add Project" onclick="renderPage.dispatchAddProject()"><input type="button" value="Cancel" onclick="renderPage.toggleProjectForm()">
+            <input type="submit" value="Add Project" id="submitProjectButton"><input type="button" value="Cancel" id="cancelProjectForm">
         </form>
     </div>
 </div>
@@ -81,5 +81,5 @@ w
 
 
 </body>
-<script src="../src/index.js"></script>
+<script src="main.js"></script>
 </html>

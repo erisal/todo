@@ -1,6 +1,13 @@
 
+import differenceInCalendarDays from 'date-fns/differenceInCalendarDays'
 
-// const { library } = require("webpack");
+// set current date
+const today = new Date();
+const dd = String(today.getDate()).padStart(2, '0');
+const mm = String(today.getMonth() + 1).padStart(2, '0'); //January is 0!
+const yyyy = today.getFullYear();
+const currentDate = `${yyyy}-${mm}-${dd}`;
+
 
 const locStorage = (() => {
 // check if local storage available
@@ -268,7 +275,28 @@ const renderPage = (() => {
     let currentProjIndex = 0;
     let project = projects.getProject(currentProjIndex);
     let projectList = projects.getProjects();    
-    
+
+    //populate function calls html
+    // set listener to +add button
+    const addProjectButton = document.getElementById('addProjectButton');
+    addProjectButton.addEventListener('click', () => toggleProjectForm());
+
+    //submit task
+    const submitTaskButton = document.getElementById('submitTask');
+    submitTaskButton.addEventListener('click', () => renderPage.dispatchAddTask());
+
+    //cancel task form
+    const cancelTaskButton = document.getElementById('cancelTaskForm');
+    cancelTaskButton.addEventListener('click', ()=> renderPage.toggleTaskForm());
+
+    //add project button
+    const submitProjectButton = document.getElementById('submitProjectButton');
+    submitProjectButton.addEventListener('click', () => renderPage.dispatchAddProject());
+
+    //cancel project form
+    const cancelProjectButton = document.getElementById('cancelProjectForm');
+    cancelProjectButton.addEventListener('click', ()=> renderPage.toggleProjectForm());
+
     const renderContent = (index) => {
         //clear page
         // const content = document.getElementById('content');
@@ -295,7 +323,7 @@ const renderPage = (() => {
         // add task button
         const addTaskButton = document.createElement('input');
         addTaskButton.type = 'button';
-        addTaskButton.setAttribute('onclick', 'renderPage.toggleTaskForm()');
+        addTaskButton.addEventListener('click', () => renderPage.toggleTaskForm());
         addTaskButton.value = "+ add task";
         addTaskButton.id = "addTaskButton";
         catFunctions.appendChild(addTaskButton);
@@ -303,7 +331,7 @@ const renderPage = (() => {
         //delete project button
         const deleteProjectButton = document.createElement('input');
         deleteProjectButton.type = 'button';
-        deleteProjectButton.setAttribute('onclick', `renderPage.dispatchDelProject(${currentProjIndex})`);
+        deleteProjectButton.addEventListener('click', () => renderPage.dispatchDelProject(currentProjIndex));
         deleteProjectButton.value = "- delete project";
         deleteProjectButton.id = "addTaskButton";
         catFunctions.appendChild(deleteProjectButton);
@@ -328,6 +356,11 @@ const renderPage = (() => {
     };
 
     const renderTask = (task, index) => {
+        let taskTitleText = task.getTitle();
+        let dueDate = task.getDue();
+        let descriptionText = task.getDescription();
+
+
         let taskContainer = document.createElement('div');
         taskContainer.classList.add('taskContainer');
         
@@ -337,22 +370,32 @@ const renderPage = (() => {
 
         let taskTitle = document.createElement('div');
         taskTitle.classList.add('taskTitle');
-        taskTitle.textContent = task.getTitle();
+        
+        // add dots to imply expand if description exists
+        if (descriptionText != '') {
+            taskTitleText += " ...";
+        }
+        taskTitle.textContent = taskTitleText;
 
         // event listener to expand/contract task details (after task functions)
         taskTitle.addEventListener('click', () => toggleTaskBody(index));
 
-        let dueDate = document.createElement('div');
-        dueDate.classList.add('dueDate');
-        dueDate.textContent = task.getDue();
+        // show due date if set
         
+        let dueDateDiv = document.createElement('div');
+        dueDateDiv.classList.add('dueDate');
 
+        if (dueDate != '') {
+            const daysBetween = differenceInCalendarDays(new Date(dueDate), new Date(currentDate));
+            dueDateDiv.textContent = `${daysBetween}D left (${dueDate})`;
+        }
+        
         let taskFunctions = document.createElement('div');
         taskFunctions.classList.add('taskFunctions');
 
         const delTaskButton = document.createElement('input');
         delTaskButton.type = 'button';
-        delTaskButton.setAttribute('onclick', `renderPage.dispatchDelTask(${index})`);
+        delTaskButton.addEventListener('click', () => renderPage.dispatchDelTask(index));
         delTaskButton.value = "- delete";
         delTaskButton.classList.add('delTaskButton');
 
@@ -367,7 +410,7 @@ const renderPage = (() => {
         taskDescription.textContent = task.getDescription();
 
         taskHead.appendChild(taskTitle);
-        taskHead.appendChild(dueDate);
+        taskHead.appendChild(dueDateDiv);
         taskHead.appendChild(taskFunctions);
 
         taskBody.appendChild(taskDescription);
@@ -382,6 +425,7 @@ const renderPage = (() => {
 
         //generate menu links
     const renderMenu = () => { 
+
         const projectMenu = document.getElementById('projectMenu');
         projectMenu.innerHTML = '';
 
@@ -426,6 +470,12 @@ const renderPage = (() => {
 
     const dispatchAddTask = () => {
         let newTitle = document.getElementById('newTaskTitle').value;
+        
+        //confirm has title, otherwise leave form up
+        if (newTitle == '') {
+            return;
+        }
+        console.log('new title: ' + newTitle);
         let newDescription = document.getElementById('newTaskDescription').value;
         let newDue = document.getElementById('newTaskDue').value;
         let newPriority = document.getElementById('newTaskPriority').value;
